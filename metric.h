@@ -43,7 +43,7 @@ typedef const char * test_t;
 #define METRIC_DISPLAY(name, start, stop) 
 #define METRIC_START() 
 #define METRIC_STOP(name)
-#define METRIC_CALL(call, times) 
+#define METRIC_CALL(times, call, ...) 
 #define METRIC_TEST_OK(msg) 
 #define METRIC_TEST_FAIL(msg) 
 #define METRIC_TEST(test) 
@@ -88,10 +88,10 @@ typedef const char * test_t;
 }
 
 
-#define METRIC_CALL(call, times) {                                 \
+#define METRIC_CALL(times, call, ...) {                            \
   clock_t metric_clock_start = clock();                             \
   for (int metric_count = 0; metric_count < times; metric_count++) \
-    call;                                                           \
+    call(__VA_ARGS__);                                              \
   METRIC_DISPLAY(#call " x " #times, metric_clock_start, clock()); \
 }
 
