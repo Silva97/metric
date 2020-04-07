@@ -95,7 +95,7 @@ typedef const char * test_t;
   METRIC_DISPLAY(#call " x " #times, metric_clock_start, clock()); \
 }
 
-/*** Test's macro ***/
+/*** Unit test macros ***/
 
 #define METRIC_TEST_OK(msg) \
   return "[" AC_G " OK " AC_N "] " msg
@@ -108,8 +108,8 @@ typedef const char * test_t;
     __LINE__,                                                                \
     test())
 
-#define METRIC_ASSERT(expr)                                          \
-  if ( !(expr) ) METRIC_TEST_FAIL("Assertion is false: `" #expr "'")
+#define METRIC_ASSERT(expr)                                              \
+  if ( !(expr) ) METRIC_TEST_FAIL("The assertion is false: `" #expr "'")
 
 #define METRIC_ASSERT_ARRAY(arr1, arr2, size)                         \
   if ( memcmp(arr1, arr2, size) )                                      \
