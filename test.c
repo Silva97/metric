@@ -113,9 +113,9 @@ int main(void)
   // Benchmark //
   METRIC_START();
 
-  METRIC_CALL(fibrec(20), 1);
-  METRIC_CALL(fibrec(20), 5000);
-  METRIC_CALL(fibrec(40), 1);
+  METRIC_CALL(1, fibrec, 20);
+  METRIC_CALL(5000, fibrec, 20);
+  METRIC_CALL(1, fibrec, 40);
 
   METRIC_STOP("total_bench");
   return 0;
