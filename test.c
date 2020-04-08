@@ -111,6 +111,7 @@ int main(void)
   METRIC_TEST(test_fibrec);
 
   // Benchmark //
+  METRIC_LOG("%s\n", "Starting benchmark...");
   METRIC_START();
 
   METRIC_CALL(1, fibrec, 20);
@@ -118,5 +119,7 @@ int main(void)
   METRIC_CALL(1, fibrec, 40);
 
   METRIC_STOP("total_bench");
+
+  METRIC_LOG("Benchmark stopped at line %d.\n", __LINE__);
   return 0;
 }
