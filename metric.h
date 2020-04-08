@@ -40,13 +40,14 @@ typedef const char * test_t;
 
 #ifdef NDEBUG
 
-#define METRIC_DISPLAY(name, start, stop) 
-#define METRIC_START() 
+#define METRIC_DISPLAY(name, start, stop)
+#define METRIC_START()
 #define METRIC_STOP(name)
-#define METRIC_CALL(times, call, ...) 
-#define METRIC_TEST_OK(msg) 
-#define METRIC_TEST_FAIL(msg) 
-#define METRIC_TEST(test) 
+#define METRIC_CALL(times, call, ...)
+#define METRIC_LOG(mask, ...)
+#define METRIC_TEST_OK(msg)
+#define METRIC_TEST_FAIL(msg)
+#define METRIC_TEST(test)
 #define METRIC_ASSERT(expr)
 #define METRIC_ASSERT_ARRAY(arr1, arr2, size)
 #define METRIC_ASSERT_STRING(str1, str2)
@@ -94,6 +95,9 @@ typedef const char * test_t;
     call(__VA_ARGS__);                                              \
   METRIC_DISPLAY(#call " x " #times, metric_clock_start, clock()); \
 }
+
+#define METRIC_LOG(mask, ...) \
+  printf("<" AC_W "LOG" AC_N "> " mask, __VA_ARGS__)
 
 /*** Unit test macros ***/
 
