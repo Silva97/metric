@@ -1,3 +1,4 @@
+![version-0.1](https://img.shields.io/badge/version-0.1-lightgrey)
 ![c99-compatible](https://img.shields.io/static/v1?logo=c&logoColor=lightgrey&color=green&label=99&message=compatible)
 
 # metric
