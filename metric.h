@@ -48,6 +48,7 @@ static int metric_count_tests_ok   = 0;
 #define METRIC_STOP(name)
 #define METRIC_CALL(times, call, ...)
 #define METRIC_LOG(mask, ...)
+#define METRIC_LOG_ARRAY(mask, array, length)
 #define METRIC_TEST_OK(msg)
 #define METRIC_TEST_FAIL(msg)
 #define METRIC_TEST(test)
@@ -93,15 +94,24 @@ static int metric_count_tests_ok   = 0;
 }
 
 
-#define METRIC_CALL(times, call, args...) {                                   \
-  clock_t metric_clock_start = clock();                                        \
-  for (int metric_count = 0; metric_count < times; metric_count++)            \
-    call(args);                                                                \
+#define METRIC_CALL(times, call, args...) {                                 \
+  clock_t metric_clock_start = clock();                                      \
+  for (int metric_count = 0; metric_count < times; metric_count++)          \
+    call(args);                                                              \
   METRIC_DISPLAY(#call "(" #args ") x " #times, metric_clock_start, clock()); \
 }
 
+/*** Utils ***/
+
 #define METRIC_LOG(mask, ...) \
   printf("<" AC_W "LOG" AC_N "> " mask, __VA_ARGS__)
+
+#define METRIC_LOG_ARRAY(mask, array, length) {                             \
+  printf("<" AC_W "LOG" AC_N "> " #array "[%d] = {" mask, length, array[0]); \
+  for (int i = 1; i < length; i++)                                          \
+    printf(", " mask, array[i]);                                             \
+  puts("}");                                                                  \
+}
 
 /*** Unit test macros ***/
 
@@ -124,7 +134,7 @@ static int metric_count_tests_ok   = 0;
   printf("\nTests: %d | Failures: " AC_R "%d" AC_N    \
     " | Successes: " AC_G "%d" AC_N "\n\n",          \
     metric_count_tests_fail + metric_count_tests_ok,  \
-    metric_count_tests_fail,                         \
+    metric_count_tests_fail,                           \
     metric_count_tests_ok)
 
 #define METRIC_ASSERT(expr)                                              \
