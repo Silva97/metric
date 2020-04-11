@@ -1,4 +1,4 @@
-![version-0.1](https://img.shields.io/badge/version-0.1-lightgrey)
+![version-0.2](https://img.shields.io/badge/version-0.2-lightgrey)
 ![c99-compatible](https://img.shields.io/static/v1?logo=c&logoColor=lightgrey&color=green&label=99&message=compatible)
 
 # metric
@@ -36,12 +36,13 @@ test_t test_fib(void)
 int main(void)
 {
   METRIC_TEST(test_fib);
+  METRIC_TEST_END();
   return 0;
 }
 ```
 
 Output:  
-![test-output](https://i.imgur.com/yXZ4riX.png)
+![test-output](https://i.imgur.com/D2jSbKm.png)
 
 ### Example of benchmarking
 ```c
@@ -69,4 +70,4 @@ int main(void)
 ```
 
 Output:  
-![measure-output](https://i.imgur.com/e0D3AXx.png)
+![measure-output](https://i.imgur.com/F6cvRjK.png)
