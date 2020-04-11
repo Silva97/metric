@@ -106,11 +106,12 @@ static int metric_count_tests_ok   = 0;
 #define METRIC_LOG(mask, ...) \
   printf("<" AC_W "LOG" AC_N "> " mask, __VA_ARGS__)
 
-#define METRIC_LOG_ARRAY(mask, array, length) {                             \
-  printf("<" AC_W "LOG" AC_N "> " #array "[%d] = {" mask, length, array[0]); \
-  for (int i = 1; i < length; i++)                                          \
-    printf(", " mask, array[i]);                                             \
-  puts("}");                                                                  \
+#define METRIC_LOG_ARRAY(mask, array, length) {           \
+  printf("<" AC_W "LOG" AC_N "> " #array "[%d] = {" mask,  \
+    (int) (length), array[0]);                            \
+  for (int i = 1; i < length; i++)                         \
+    printf(", " mask, array[i]);                          \
+  puts("}");                                               \
 }
 
 /*** Unit test macros ***/
