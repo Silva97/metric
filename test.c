@@ -81,6 +81,10 @@ test_t test_custom_fail(void)
 
 
 // For benchmark example //
+int sum(int a, int b, int c)
+{
+  return a + b + c;
+}
 
 uint64_t fibrec(uint64_t n)
 {
@@ -110,6 +114,8 @@ int main(void)
   METRIC_TEST(test_custom_fail);
   METRIC_TEST(test_fibrec);
 
+  METRIC_TEST_END();
+
   // Benchmark //
   METRIC_LOG("%s\n", "Starting benchmark...");
   METRIC_START();
@@ -117,6 +123,7 @@ int main(void)
   METRIC_CALL(1, fibrec, 20);
   METRIC_CALL(5000, fibrec, 20);
   METRIC_CALL(1, fibrec, 40);
+  METRIC_CALL(999999, sum, 4, 5, 6);
 
   METRIC_STOP("total_bench");
 
