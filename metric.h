@@ -79,10 +79,10 @@ static int metric_count_tests_ok   = 0;
 #endif /* ANSI_COLORS */
 
 
-#define METRIC_DISPLAY(name, start, stop)                    \
-  printf("<" AC_Y "BENCH" AC_N "> " __FILE__ ": " name  "\n"  \
-    "        %lld clocks, %.8lf secs\n",                     \
-    (long long int) (stop - start),                           \
+#define METRIC_DISPLAY(name, start, stop)                             \
+  printf("<" AC_Y "BENCH" AC_N "> " __FILE__ ": " AC_W name AC_N "\n"  \
+    "        %lld clocks, %.8lf secs\n",                              \
+    (long long int) (stop - start),                                    \
     ( (double) stop - start ) / CLOCKS_PER_SEC)
 
 #define METRIC_START() { \
@@ -93,11 +93,11 @@ static int metric_count_tests_ok   = 0;
 }
 
 
-#define METRIC_CALL(times, call, ...) {                            \
-  clock_t metric_clock_start = clock();                             \
-  for (int metric_count = 0; metric_count < times; metric_count++) \
-    call(__VA_ARGS__);                                              \
-  METRIC_DISPLAY(#call " x " #times, metric_clock_start, clock()); \
+#define METRIC_CALL(times, call, args...) {                                   \
+  clock_t metric_clock_start = clock();                                        \
+  for (int metric_count = 0; metric_count < times; metric_count++)            \
+    call(args);                                                                \
+  METRIC_DISPLAY(#call "(" #args ") x " #times, metric_clock_start, clock()); \
 }
 
 #define METRIC_LOG(mask, ...) \
