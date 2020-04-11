@@ -34,8 +34,11 @@
 #include <string.h>
 #include <time.h>
 
-
 typedef const char * test_t;
+
+/* Variables */
+static int metric_count_tests_fail = 0;
+static int metric_count_tests_ok   = 0;
 
 
 #ifdef NDEBUG
@@ -48,6 +51,7 @@ typedef const char * test_t;
 #define METRIC_TEST_OK(msg)
 #define METRIC_TEST_FAIL(msg)
 #define METRIC_TEST(test)
+#define METRIC_TEST_END()
 #define METRIC_ASSERT(expr)
 #define METRIC_ASSERT_ARRAY(arr1, arr2, size)
 #define METRIC_ASSERT_STRING(str1, str2)
@@ -101,16 +105,27 @@ typedef const char * test_t;
 
 /*** Unit test macros ***/
 
-#define METRIC_TEST_OK(msg) \
-  return "[" AC_G " OK " AC_N "] " msg
+#define METRIC_TEST_OK(msg) {           \
+  metric_count_tests_ok++;               \
+  return "[" AC_G " OK " AC_N "] " msg;   \
+}
 
-#define METRIC_TEST_FAIL(msg) \
-  return "[" AC_R "FAIL" AC_N "] " msg 
+#define METRIC_TEST_FAIL(msg) {         \
+  metric_count_tests_fail++;             \
+  return "[" AC_R "FAIL" AC_N "] " msg;   \
+}
 
 #define METRIC_TEST(test)                                                    \
   printf("<" AC_B "TEST" AC_N "> " __FILE__ ":%d: " AC_W #test AC_N "\n%s\n", \
-    __LINE__,                                                                \
+    __LINE__,                                                                  \
     test())
+
+#define METRIC_TEST_END()                            \
+  printf("\nTests: %d | Failures: " AC_R "%d" AC_N    \
+    " | Successes: " AC_G "%d" AC_N "\n\n",          \
+    metric_count_tests_fail + metric_count_tests_ok,  \
+    metric_count_tests_fail,                         \
+    metric_count_tests_ok)
 
 #define METRIC_ASSERT(expr)                                              \
   if ( !(expr) ) METRIC_TEST_FAIL("The assertion is false: `" #expr "'")
