@@ -4,3 +4,6 @@ set(BINARY "output_bin")    # The output binary name
 # Use ${ARCH} variable to access architecture dependent directory
 # Example: "arch/${ARCH}/subdir"
 set(SRCDIRS #[["sub1" "sub2" "sub3"]])
+
+# Directories to read metric tests
+set(TESTDIRS "tests/feature" "tests/unit")

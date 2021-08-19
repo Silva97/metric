@@ -18,5 +18,6 @@ function(read_tests directory)
     endforeach()
 endfunction()
 
-read_tests("tests/feature")
-read_tests("tests/unit")
+foreach(TEST ${TESTDIRS})
+    read_tests(${TEST})
+endforeach()
