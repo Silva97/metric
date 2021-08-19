@@ -1,7 +1,9 @@
 /.vscode
 /bin
+/Testing
 
 Makefile
 cmake_install.cmake
+CTestTestfile.cmake
 CMakeCache.txt
 CMakeFiles

@@ -47,3 +47,5 @@ endforeach()
 
 
 add_executable(${BINARY} ${ROOT_SRC} ${ARCH_SRC} ${SUBDIRECTORIES_SRC})
+
+include("tests.cmake")
