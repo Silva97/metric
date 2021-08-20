@@ -91,13 +91,26 @@ static int metric_count_tests_ok = 0;
   METRIC_DISPLAY(name, metric_clock_start, clock()); \
   }
 
-#define METRIC_CALL(times, call, ...)                                \
-  {                                                                  \
-    clock_t metric_clock_start = clock();                            \
-    for (int metric_count = 0; metric_count < times; metric_count++) \
-      call(__VA_ARGS__);                                             \
-    METRIC_DISPLAY(#call "(" #__VA_ARGS__ ") x " #times,             \
-                   metric_clock_start, clock());                     \
+#define METRIC_CALL(times, call, ...)                                                                                       \
+  {                                                                                                                         \
+    volatile clock_t metric_clock_min_start = 0;                                                                            \
+    volatile clock_t metric_clock_min_end;                                                                                  \
+    volatile clock_t metric_clock_start;                                                                                    \
+    volatile clock_t metric_clock_end;                                                                                      \
+    int metric_count;                                                                                                       \
+    for (metric_count = 0; metric_count < times; metric_count++)                                                            \
+    {                                                                                                                       \
+      metric_clock_start = clock();                                                                                         \
+      call(__VA_ARGS__);                                                                                                    \
+      metric_clock_end = clock();                                                                                           \
+      if (!metric_clock_min_start || metric_clock_end - metric_clock_start < metric_clock_min_end - metric_clock_min_start) \
+      {                                                                                                                     \
+        metric_clock_min_start = metric_clock_start;                                                                        \
+        metric_clock_min_end = metric_clock_end;                                                                            \
+      }                                                                                                                     \
+    }                                                                                                                       \
+    METRIC_DISPLAY(#call "(" #__VA_ARGS__ ") x " #times,                                                                    \
+                   metric_clock_min_start, metric_clock_min_end);                                                           \
   }
 
 /*** Utils ***/
