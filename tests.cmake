@@ -4,7 +4,7 @@ set(ROOT_SRC_WITHOUT_MAIN ${ROOT_SRC})
 list(REMOVE_ITEM ROOT_SRC_WITHOUT_MAIN "src/main.c")
 
 function(read_tests directory)
-    aux_source_directory(${directory} TEST_FILES)
+    find_src(${directory} TEST_FILES)
 
     foreach(TEST_FILE ${TEST_FILES})
         get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)

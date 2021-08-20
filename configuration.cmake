@@ -7,3 +7,6 @@ set(SRCDIRS #[["sub1" "sub2" "sub3"]])
 
 # Directories to read metric tests
 set(TESTDIRS "tests/feature" "tests/unit")
+
+# The GLOB used to match source files
+set(SRCGLOB "*.c" "*.s")

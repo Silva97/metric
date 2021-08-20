@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
-project("project_name" VERSION 1.0.0)
+project("project_name"
+        VERSION 1.0.0
+        LANGUAGES C ASM)
 
 ### Target architecture ###
 
@@ -28,20 +30,26 @@ endif()
 
 ### Build configurations ###
 
+function (find_src directory var)
+    list(TRANSFORM SRCGLOB PREPEND "${directory}/" OUTPUT_VARIABLE GLOBLIST)
+    file(GLOB SRCLIST RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" CONFIGURE_DEPENDS ${GLOBLIST})
+    set(${var} ${SRCLIST} PARENT_SCOPE)
+endfunction()
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
 include_directories("include")
 
-aux_source_directory("src" ROOT_SRC)
+find_src("src" ROOT_SRC)
 
 # Architecture dependent directory
 if (EXISTS "src/arch/${ARCH}")
-    aux_source_directory("src/arch/${ARCH}" ARCH_SRC)
+    find_src("src/arch/${ARCH}" ARCH_SRC)
     include_directories("src/arch/${ARCH}/include")
 endif()
 
 # Subdirectories of src/ directory
 foreach(SUBDIR ${SRCDIRS})
-    aux_source_directory("src/${SUBDIR}" SUBDIR_SRC)
+    find_src("src/${SUBDIR}" SUBDIR_SRC)
     list(APPEND SUBDIRECTORIES_SRC ${SUBDIR_SRC})
 endforeach()
 
