@@ -151,8 +151,8 @@ static int metric_count_tests_ok = 0;
          " | Successes: " AC_G "%d" AC_N "\n\n",          \
          metric_count_tests_fail + metric_count_tests_ok, \
          metric_count_tests_fail,                         \
-         metric_count_tests_ok),                          \
-      metric_count_tests_fail
+         metric_count_tests_ok);                          \
+  return metric_count_tests_fail
 
 #define METRIC_ASSERT(expr) \
   if (!(expr))              \
