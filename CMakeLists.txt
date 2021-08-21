@@ -55,5 +55,6 @@ endforeach()
 
 
 add_executable(${BINARY} ${ROOT_SRC} ${ARCH_SRC} ${SUBDIRECTORIES_SRC})
+install(TARGETS ${BINARY})
 
 include("tests.cmake")
