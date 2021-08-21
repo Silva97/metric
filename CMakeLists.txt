@@ -37,7 +37,7 @@ function (find_src directory var)
 endfunction()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
-include_directories("include")
+include_directories(${INCDIRS})
 
 find_src("src" ROOT_SRC)
 

@@ -5,6 +5,9 @@ set(BINARY "output_bin")    # The output binary name
 # Example: "arch/${ARCH}/subdir"
 set(SRCDIRS #[["sub1" "sub2" "sub3"]])
 
+# The list of include directories
+set(INCDIRS "include")
+
 # Directories to read metric tests
 set(TESTDIRS "tests/feature" "tests/unit")
 
