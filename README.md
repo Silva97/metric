@@ -30,7 +30,7 @@ The possible names of architecture is `x86_64`, `i386`, `ia64`, `arm64` and any 
 ## Creating new project with metric
 This repository is a template repository, so you can create a new repository using this template as base following the instructions:
 * English: [Creating a repository from a template]
-* Portuguese: [Criar um repositório a partir de um modelo]
+* Português: [Criar um repositório a partir de um modelo]
 
 In `CMakeLists.txt` update the [project] command to set the project's name, version and languages.
 
